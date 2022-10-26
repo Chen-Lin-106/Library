@@ -22,7 +22,14 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
-const bookCards = document.querySelectorAll(".card");
+const bookCards = document.querySelector(".card");
+const addBook = document.querySelector("#add-btn");
+const newBook = document.querySelector(".newbook");
+const addedBook = document.querySelector("#btn-added");
+const title = document.querySelector("#title");
+const author = document.querySelector("#author");
+const pages = document.querySelector("#pages");
+const isRead = document.querySelector("#isRead");
 
 myLibrary.forEach(function (item, index) {
   console.log(item.title);
@@ -39,3 +46,26 @@ myLibrary.forEach(function (item, index) {
 
   document.querySelector(".cards").innerHTML += codeBlock;
 });
+
+addBook.addEventListener("click", displayAdd);
+
+function displayAdd() {
+  newBook.style.display = "block";
+}
+
+addedBook.addEventListener("click", function submitAdd(event) {
+  event.prevenDefault();
+  addBookToLibrary;
+  newBook.style.display = "none";
+});
+
+function addBookToLibrary() {
+  const bookNew = new Book(
+    title.value,
+    author.value,
+    pages.value,
+    isRead.value
+  );
+  myLibrary.push(bookNew);
+  console.log(title.value);
+}

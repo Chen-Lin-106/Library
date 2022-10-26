@@ -8,9 +8,20 @@
     <title>Document</title>
   </head>
   <body>
-    <div class="add-btn">
-      <button>+</button>
+    <div class="btn">
+      <button id="add-btn">+</button>
     </div>
+    <form class="newbook" action="">
+      <p>Add a New Book</p>
+      <input id="title" type="text" placeholder="Title" />
+      <input id="author" type="text" placeholder="Author" />
+      <input id="pages" type="number" placeholder="Pages" />
+      <br />
+      <label for="">Have you read it yet ?</label
+      ><input id="isRead" type="checkbox" value="read" />
+      <br />
+      <button id="btn-added">ADD</button>
+    </form>
     <div class="cards"></div>
   </body>
   <script src="script.js"></script>
