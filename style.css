@@ -1,0 +1,38 @@
+.add-btn button {
+  background-color: #f4511e;
+  border: none;
+  border-radius: 50%;
+  color: #ffffff;
+  text-align: center;
+  cursor: pointer;
+}
+.card {
+  width: 300px;
+  background-color: #e2e8f0;
+  height: 180px;
+  display: flex;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.card img {
+  width: 100px;
+  border-radius: 10px;
+}
+
+.card .book-detail {
+  margin-left: 20px;
+}
+
+.card .book-detail button {
+  border-radius: 30px;
+  background-color: #f4511e;
+  border: none;
+  color: #ffffff;
+  text-align: center;
+  padding: 10px 30px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
