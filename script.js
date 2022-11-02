@@ -1,19 +1,14 @@
-let myLibrary = [
-  {
-    title: "How to Catch a Star",
-    author: "Oliver Jeffers",
-    pages: 32,
-    read: "not read yet",
-    image: "/images/star.jpeg",
-  },
-  {
-    title: "The Cow Tripped Over the Moon",
-    author: "Tony Wilson",
-    pages: 32,
-    read: "not read yet",
-    image: "/images/cow.jpeg",
-  },
-];
+let myLibrary = [];
+
+const bookList = document.querySelector(".cards");
+const bookCards = document.querySelector(".card");
+const addNewBook = document.querySelector("#add-btn");
+const newBook = document.querySelector(".newbook");
+const add = document.querySelector("#btn-added");
+const title = document.querySelector("#title");
+const author = document.querySelector("#author");
+const pages = document.querySelector("#pages");
+const isRead = document.querySelector("#isRead");
 
 function Book(title, author, pages, read) {
   this.title = title;
@@ -22,40 +17,31 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
-const bookCards = document.querySelector(".card");
-const addBook = document.querySelector("#add-btn");
-const newBook = document.querySelector(".newbook");
-const addedBook = document.querySelector("#btn-added");
-const title = document.querySelector("#title");
-const author = document.querySelector("#author");
-const pages = document.querySelector("#pages");
-const isRead = document.querySelector("#isRead");
-
-myLibrary.forEach(function (item, index) {
-  console.log(item.title);
-  const codeBlock = `<div id="card-${index + 1} "class="card">
-                        <img src="${item.image}" alt="" />
-                        <div class="book-detail">
-                           <p>${item.title}</p>
-                           <p>${item.author}</p>
-                           <p>Pages - <span>${item.pages}</span></p>
-                           <p>Read Status - <span>${item.read}</span></p>
-                           <button>Remove</button>
-                        </div>
-                    </div>`;
-
-  document.querySelector(".cards").innerHTML += codeBlock;
-});
-
-addBook.addEventListener("click", displayAdd);
-
-function displayAdd() {
-  newBook.style.display = "block";
+function displayBook() {
+  let codeBlock;
+  myLibrary.forEach(function (item, index) {
+    console.log(item.title);
+    codeBlock = `<div id="card-${index + 1} "class="card">
+                          <img src="/images/book.jpeg" alt="" />
+                          <div class="book-detail">
+                             <p>${item.title}</p>
+                             <p>${item.author}</p>
+                             <p>Pages - <span>${item.pages}</span></p>
+                             <p>Read Status - <span>${item.read}</span></p>
+                             <button>Remove</button>
+                          </div>
+                      </div>`;
+  });
+  bookList.innerHTML += codeBlock;
 }
 
-addedBook.addEventListener("click", function submitAdd(event) {
-  event.prevenDefault();
-  addBookToLibrary;
+addNewBook.addEventListener("click", function () {
+  newBook.style.display = "block";
+});
+
+add.addEventListener("click", function (e) {
+  e.preventDefault();
+  addBookToLibrary();
   newBook.style.display = "none";
 });
 
@@ -67,5 +53,6 @@ function addBookToLibrary() {
     isRead.value
   );
   myLibrary.push(bookNew);
-  console.log(title.value);
+  console.log(myLibrary);
+  displayBook();
 }
