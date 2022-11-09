@@ -1,57 +1,71 @@
 let myLibrary = [];
 
-const bookList = document.querySelector(".cards");
-const bookCards = document.querySelector(".card");
-const addNewBook = document.querySelector("#add-btn");
-const newBook = document.querySelector(".newbook");
-const add = document.querySelector("#btn-added");
-const title = document.querySelector("#title");
-const author = document.querySelector("#author");
-const pages = document.querySelector("#pages");
+const books = document.querySelector(".cards");
+const addNew = document.querySelector("#btn-new");
+const addBook = document.querySelector("#btn-add");
+const newBook = document.querySelector("form");
+const formTitle = document.querySelector("#title");
+const formAuthor = document.querySelector("#author");
+const formPages = document.querySelector("#pages");
 const isRead = document.querySelector("#isRead");
+const titleForm = document.querySelector("#form-title");
+const authorForm = document.querySelector("#form-author");
+const pagesForm = document.querySelector("#form-pages");
 
-function Book(title, author, pages, read) {
+function Book(title, author, pages) {
   this.title = title;
   this.author = author;
   this.pages = pages;
-  this.read = read;
 }
 
 function displayBook() {
-  let codeBlock;
+  const bookCard = document.createElement("div");
+  bookCard.className = "card";
+
+  books.appendChild(bookCard);
+
+  const bookImage = document.createElement("img");
+  bookImage.src = "/images/book.jpeg";
+
+  const bookDetail = document.createElement("div");
+
+  bookCard.appendChild(bookImage);
+  bookCard.appendChild(bookDetail);
+
+  const title = document.createElement("p");
+  const author = document.createElement("p");
+  const pages = document.createElement("p");
+  const removeBtn = document.createElement("button");
+  removeBtn.className = "btn-remove";
+  removeBtn.textContent = "Remove";
+
+  bookDetail.appendChild(title);
+  bookDetail.appendChild(author);
+  bookDetail.appendChild(pages);
+  bookDetail.appendChild(removeBtn);
+
   myLibrary.forEach(function (item, index) {
-    console.log(item.title);
-    codeBlock = `<div id="card-${index + 1} "class="card">
-                          <img src="/images/book.jpeg" alt="" />
-                          <div class="book-detail">
-                             <p>${item.title}</p>
-                             <p>${item.author}</p>
-                             <p>Pages - <span>${item.pages}</span></p>
-                             <p>Read Status - <span>${item.read}</span></p>
-                             <button>Remove</button>
-                          </div>
-                      </div>`;
+    title.textContent = `${item.title}`;
+    author.textContent = `${item.author}`;
+    pages.textContent = `${item.pages} + " pages"`;
+    removeBtn.dataset.id = index + 1;
   });
-  bookList.innerHTML += codeBlock;
 }
 
-addNewBook.addEventListener("click", function () {
+addNew.addEventListener("click", function (e) {
+  console.log(e.target);
   newBook.style.display = "block";
 });
 
-add.addEventListener("click", function (e) {
+addBook.addEventListener("click", function (e) {
   e.preventDefault();
   addBookToLibrary();
   newBook.style.display = "none";
 });
 
 function addBookToLibrary() {
-  const bookNew = new Book(
-    title.value,
-    author.value,
-    pages.value,
-    isRead.value
-  );
+  console.log("start to add");
+  const bookNew = new Book(titleForm.value, authorForm.value, pagesForm.value);
   myLibrary.push(bookNew);
   console.log(myLibrary);
   displayBook();
