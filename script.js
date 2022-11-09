@@ -45,15 +45,23 @@ function displayBook() {
   bookDetail.appendChild(removeBtn);
 
   myLibrary.forEach(function (item, index) {
+    bookCard.setAttribute("id", `card-${index + 1}`);
     title.textContent = `${item.title}`;
     author.textContent = `${item.author}`;
     pages.textContent = `${item.pages} + " pages"`;
     removeBtn.dataset.id = index + 1;
   });
+
+  removeBtn.addEventListener("click", function removeFromLibrary(e) {
+    let indexRemove = e.target.dataset.id - 1;
+    myLibrary.splice(indexRemove, 1);
+    console.log(bookDetail.parentElement);
+    bookDetail.parentElement.remove();
+    console.log(myLibrary);
+  });
 }
 
 addNew.addEventListener("click", function (e) {
-  console.log(e.target);
   newBook.style.display = "block";
 });
 
@@ -64,9 +72,7 @@ addBook.addEventListener("click", function (e) {
 });
 
 function addBookToLibrary() {
-  console.log("start to add");
   const bookNew = new Book(titleForm.value, authorForm.value, pagesForm.value);
   myLibrary.push(bookNew);
-  console.log(myLibrary);
   displayBook();
 }
